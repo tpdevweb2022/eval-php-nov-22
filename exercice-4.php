@@ -988,12 +988,20 @@ $array = [
 // Consignes
 // 4.1. Grâce à la boucle de votre choix, afficher dans une première div,
 // un tableau composé de la globalité des personnes suspectées
-
+foreach ($array as $person){
+    // echo "<div>{$person['first_name']} {$person['last_name']}</div>";
+}
 
 
 // 4.2. Dans une seconde div, afficher de manière linéaire, séparés par une virgule,
 // les personnes étant du genre féminin
-
+$females = [];
+foreach ($array as $person){
+    if($person['gender'] === "Female"){
+        $females[] = $person["first_name"] . " " . $person["last_name"];
+    }
+}
+// echo implode(", ", $females);
 
 
 // 4.3. Filtrer maintenant ce tableau en ne conservant que les personnes possédant
@@ -1001,4 +1009,6 @@ $array = [
 // que l'année 2007 au vu des caméras du Parking extérieur
 
 
+$suspect = array_filter($array, fn ($item) => ($item["car_brand"] === "Mercedes-Benz" && $item["gender"] === "Female" && $item["car_year"] > 2007));
+var_dump($suspect);
 
